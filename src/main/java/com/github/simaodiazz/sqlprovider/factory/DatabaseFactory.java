@@ -72,8 +72,7 @@ public class DatabaseFactory {
         return SimpleStatement.of(databaseProvider.getConnection().prepareStatement(query));
     }
 
-    @SneakyThrows
-    public void disconnect() {
+    public void disconnect() throws DatabaseDisconnectException {
         try {
             databaseProvider.getConnection().close();
         } catch (SQLException exception) {
