@@ -8,7 +8,7 @@ Além disso, o uso é simples e intuitivo, permitindo que você comece a trabalh
 
 Em resumo, o provedor de SQL é a escolha ideal para quem procura uma solução rápida, eficiente e fácil de usar para trabalhar com bancos de dados em Java. 
 Comece a usá-lo agora e experimente a diferença!
-
+<br><br>
 ```java
 package com.github.simaodiazz.sqlprovider;
 
