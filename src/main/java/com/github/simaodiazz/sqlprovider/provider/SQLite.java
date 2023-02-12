@@ -13,9 +13,15 @@ import java.sql.SQLException;
 
 public class SQLite implements Database {
 
-    private HikariDataSource dataSource;
+    private final HikariDataSource dataSource;
 
     public SQLite(DatabaseCredentials databaseCredentials) {
+
+        try {
+            Class.forName("org.sqlite.JDBC");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
 
         HikariConfig config = new HikariConfig();
 
