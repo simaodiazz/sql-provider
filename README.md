@@ -1,4 +1,4 @@
-# sql-provider
+# SQL Provider
 
 Este provedor de SQL é uma solução completa e fácil de usar para conexões e operações com diferentes tipos de banco de dados. 
 Com ele, você pode se concentrar na construção de suas funcionalidades, sem se preocupar com a complexidade da conexão e gerenciamento de banco de dados.
