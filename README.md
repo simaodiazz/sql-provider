@@ -26,7 +26,7 @@ public class Example {
             "",
             "localhost:3306",
             "default",
-            new File("storage.sql"));
+            new File("database.sql"));
 
     public static void main(String[] args) {
         DatabaseFactory databaseFactory = new DatabaseFactory(databaseCredentials);
