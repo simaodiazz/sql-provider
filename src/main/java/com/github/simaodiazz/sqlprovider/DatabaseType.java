@@ -13,7 +13,7 @@ public enum DatabaseType {
     private final String name;
 
     /**
-     * Construtor para criar uma nova instância de {@code DatabaseType}.
+     * Construtor para criar uma instância de {@code DatabaseType}.
      *
      * @param name o nome do tipo de banco de dados
      */

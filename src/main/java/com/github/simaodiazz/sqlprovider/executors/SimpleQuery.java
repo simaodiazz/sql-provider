@@ -1,9 +1,5 @@
 package com.github.simaodiazz.sqlprovider.executors;
 
-import javax.xml.crypto.Data;
-import java.math.BigDecimal;
-import java.sql.Array;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 

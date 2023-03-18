@@ -5,6 +5,7 @@ import com.github.simaodiazz.sqlprovider.provider.MySQL;
 import com.github.simaodiazz.sqlprovider.provider.SQLite;
 
 import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 
 public class DatabaseFactory {
@@ -23,9 +24,17 @@ public class DatabaseFactory {
     public void connect() {
         switch (databaseCredentials.getDatabaseType()) {
             case MYSQL:
-                database = new MySQL(databaseCredentials);
+                try {
+                    database = new MySQL(databaseCredentials);
+                } catch (ClassNotFoundException | SQLException e) {
+                    throw new RuntimeException(e);
+                }
             case SQLITE:
-                database = new SQLite(databaseCredentials);
+                try {
+                    database = new SQLite(databaseCredentials);
+                } catch (IOException | SQLException | ClassNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
         }
     }
 

@@ -1,6 +1,5 @@
 package com.github.simaodiazz.sqlprovider.executors;
 
-import java.nio.DoubleBuffer;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
