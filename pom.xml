@@ -6,7 +6,7 @@
 
     <groupId>com.github.simaodiazz</groupId>
     <artifactId>sql-provider</artifactId>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
