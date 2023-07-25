@@ -2,6 +2,8 @@ package com.github.simaodiazz.sqlprovider.executors;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SimpleQuery implements AutoCloseable {
 
