@@ -1,5 +1,6 @@
 package com.github.simaodiazz.sqlprovider;
 
+import com.github.simaodiazz.sqlprovider.executors.SimpleExecutor;
 import com.github.simaodiazz.sqlprovider.executors.SimpleStatement;
 import com.zaxxer.hikari.HikariDataSource;
 
@@ -38,9 +39,11 @@ public abstract class Database {
         }
     }
 
-    public SimpleStatement execute(String command) {
+    public SimpleExecutor execute(String command) {
         try (PreparedStatement preparedStatement = this.getConnection().prepareStatement(command)) {
-            return new SimpleStatement(preparedStatement);
+            try (SimpleStatement statement = new SimpleStatement(preparedStatement)) {
+                return SimpleExecutor.of(statement);
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

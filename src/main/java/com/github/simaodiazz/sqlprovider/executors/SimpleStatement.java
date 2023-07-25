@@ -1,8 +1,11 @@
 package com.github.simaodiazz.sqlprovider.executors;
 
+import lombok.Data;
+
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+@Data(staticConstructor = "of")
 public class SimpleStatement implements AutoCloseable {
 
     private final PreparedStatement preparedStatement;

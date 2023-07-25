@@ -1,6 +1,5 @@
 package com.github.simaodiazz.sqlprovider.executors;
 
-import com.github.simaodiazz.sqlprovider.Database;
 import lombok.Data;
 
 import java.util.LinkedHashSet;
@@ -12,30 +11,21 @@ import java.util.function.Function;
 @Data(staticConstructor = "of")
 public class SimpleExecutor {
 
-    private final Database database;
+    private final SimpleStatement statement;
 
     public void executeUpdate(String query, Consumer<SimpleStatement> statementConsumer) {
-        try (SimpleStatement statement = database.execute(query)) {
-            statementConsumer.accept(statement);
-            statement.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        statementConsumer.accept(statement);
+        statement.executeUpdate();
     }
 
     public <T> T executeQuery(String query, Consumer<SimpleStatement> statementConsumer, Function<SimpleQuery, T> resultFunction) {
 
         AtomicReference<T> value = new AtomicReference<>();
 
-        try (SimpleStatement statement = database.execute(query)) {
-            statementConsumer.accept(statement);
+        statementConsumer.accept(statement);
 
-            try (SimpleQuery resultSet = statement.executeQuery()) {
-                value.set(resultFunction.apply(resultSet));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
+        try (SimpleQuery resultSet = statement.executeQuery()) {
+            value.set(resultFunction.apply(resultSet));
         } catch (Exception e) {
             e.printStackTrace();
         }
