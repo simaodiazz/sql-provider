@@ -1,9 +1,10 @@
 package com.github.simaodiazz.sqlprovider;
 
+import com.github.simaodiazz.sqlprovider.executors.SimpleStatement;
 import com.zaxxer.hikari.HikariDataSource;
 
-import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public abstract class Database {
@@ -29,10 +30,18 @@ public abstract class Database {
 
     // Method to get a connection from the connection pool (try-with-resources is used to ensure proper connection closing)
     public Connection getConnection() {
-        try (Connection connection = hikari.getConnection()) {
+        try (Connection connection = this.hikari.getConnection()) {
             return connection;
         } catch (SQLException e) {
             // In case of an error while getting the connection, throw an exception
+            throw new RuntimeException(e);
+        }
+    }
+
+    public SimpleStatement execute(String command) {
+        try (PreparedStatement preparedStatement = this.getConnection().prepareStatement(command)) {
+            return new SimpleStatement(preparedStatement);
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
