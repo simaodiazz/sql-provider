@@ -1,8 +1,7 @@
 package com.github.simaodiazz.sqlprovider.executors;
 
 import com.github.simaodiazz.sqlprovider.Database;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.Data;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -10,8 +9,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-@Getter
-@RequiredArgsConstructor
+@Data(staticConstructor = "of")
 public class SimpleExecutor {
 
     private final Database database;
