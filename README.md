@@ -6,6 +6,7 @@ Com ele, você pode se concentrar na construção de suas funcionalidades, sem s
 Em resumo, o provedor de SQL é a escolha ideal para quem procura uma solução rápida, eficiente e fácil de usar para trabalhar com bancos de dados em Java. 
 Comece a usá-lo agora e experimente a diferença!
 <br><br>
+
 ```java
 package com.github.simaodiazz.sqlprovider;
 
@@ -13,7 +14,6 @@ import com.github.simaodiazz.sqlprovider.executors.SimpleQuery;
 import com.github.simaodiazz.sqlprovider.executors.SimpleStatement;
 
 import java.io.File;
-import java.sql.PreparedStatement;
 
 public class Example {
 
@@ -28,7 +28,7 @@ public class Example {
     public static void main(String[] args) {
         DatabaseFactory databaseFactory = new DatabaseFactory(databaseCredentials);
         databaseFactory.connect();
-        
+
         try (SimpleStatement simpleStatement = databaseFactory.execute("CREATE TABLE IF NOT EXISTS test (playerName VARCHAR(16) NOT NULL)")) {
             simpleStatement.executeUpdate();
         }

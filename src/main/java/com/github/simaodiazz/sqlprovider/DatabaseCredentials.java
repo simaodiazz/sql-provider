@@ -1,19 +1,19 @@
 package com.github.simaodiazz.sqlprovider;
 
-import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
-import java.io.File;
-
-@AllArgsConstructor
+@Builder
 @Data
 public class DatabaseCredentials {
 
-    private DatabaseType databaseType;
-    private String user;
-    private String password;
-    private String host;
-    private String database;
-    private File file;
+    private final DatabaseType type;
+    private final String driver;
+    private final String user;
+    private final String password;
+    private final String host;
+    private final String port;
+    private final String database;
+    private final String file;
 
 }
