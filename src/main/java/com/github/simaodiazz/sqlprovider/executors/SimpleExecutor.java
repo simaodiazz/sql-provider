@@ -13,12 +13,12 @@ public class SimpleExecutor {
 
     private final SimpleStatement statement;
 
-    public void executeUpdate(String query, Consumer<SimpleStatement> statementConsumer) {
+    public void executeUpdate(Consumer<SimpleStatement> statementConsumer) {
         statementConsumer.accept(statement);
         statement.executeUpdate();
     }
 
-    public <T> T executeQuery(String query, Consumer<SimpleStatement> statementConsumer, Function<SimpleQuery, T> resultFunction) {
+    public <T> T executeQuery(Consumer<SimpleStatement> statementConsumer, Function<SimpleQuery, T> resultFunction) {
 
         AtomicReference<T> value = new AtomicReference<>();
 
@@ -33,8 +33,8 @@ public class SimpleExecutor {
         return value.get();
     }
 
-    public <T> T executeSingleResultQuery(String query, Consumer<SimpleStatement> statementConsumer, SimpleAdapter<T> adapter) {
-        return executeQuery(query, statementConsumer, resultSet -> {
+    public <T> T executeSingleResultQuery(Consumer<SimpleStatement> statementConsumer, SimpleAdapter<T> adapter) {
+        return executeQuery(statementConsumer, resultSet -> {
             if (resultSet.next()) {
                 return adapter.adapt(resultSet);
             }
@@ -42,8 +42,8 @@ public class SimpleExecutor {
         });
     }
 
-    public <T> Set<T> executeMultipleResultQuery(String query, Consumer<SimpleStatement> statementConsumer, SimpleAdapter<T> adapter) {
-        return this.executeQuery(query, statementConsumer, resultSet -> {
+    public <T> Set<T> executeMultipleResultQuery(Consumer<SimpleStatement> statementConsumer, SimpleAdapter<T> adapter) {
+        return this.executeQuery(statementConsumer, resultSet -> {
 
             Set<T> elements = new LinkedHashSet<>();
             while (resultSet.next()) {
