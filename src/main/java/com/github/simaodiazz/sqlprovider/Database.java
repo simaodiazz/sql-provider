@@ -40,10 +40,8 @@ public abstract class Database {
     }
 
     public SimpleExecutor execute(String command) {
-        try (PreparedStatement preparedStatement = this.getConnection().prepareStatement(command)) {
-            try (SimpleStatement statement = new SimpleStatement(preparedStatement)) {
-                return SimpleExecutor.of(statement);
-            }
+        try (SimpleStatement statement = new SimpleStatement(this.getConnection().prepareStatement(command))) {
+            return SimpleExecutor.of(statement);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
