@@ -31,8 +31,8 @@ public abstract class Database {
 
     // Method to get a connection from the connection pool (try-with-resources is used to ensure proper connection closing)
     public Connection getConnection() {
-        try (Connection connection = this.hikari.getConnection()) {
-            return connection;
+        try {
+            return this.hikari.getConnection();
         } catch (SQLException e) {
             // In case of an error while getting the connection, throw an exception
             throw new RuntimeException(e);
@@ -40,8 +40,10 @@ public abstract class Database {
     }
 
     public SimpleExecutor execute(String command) {
-        try (SimpleStatement statement = new SimpleStatement(this.getConnection().prepareStatement(command))) {
-            return SimpleExecutor.of(statement);
+        try (PreparedStatement preparedStatement = this.getConnection().prepareStatement(command)) {
+            try (SimpleStatement statement = new SimpleStatement(this.getConnection().prepareStatement(command))) {
+                return SimpleExecutor.of(statement);
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
