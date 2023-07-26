@@ -19,7 +19,6 @@ public class MySQL extends Database {
 
         // Set data source properties for the connection using the credentials
         this.getHikari().addDataSourceProperty("serverName", credentials.getHost());
-        this.getHikari().addDataSourceProperty("port", credentials.getPort());
         this.getHikari().addDataSourceProperty("databaseName", credentials.getDatabase());
         this.getHikari().addDataSourceProperty("user", credentials.getUser());
         this.getHikari().addDataSourceProperty("password", credentials.getPassword());
