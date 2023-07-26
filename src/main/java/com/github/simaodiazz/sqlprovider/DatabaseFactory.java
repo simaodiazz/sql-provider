@@ -11,14 +11,17 @@ public class DatabaseFactory {
     public Database build(DatabaseCredentials credentials) {
 
         // Instance of default database
-        Database database = new SQLite();
-        database.config(credentials);
+        Database database;
 
         // Verify is MySQL connection
         if (credentials.getType() == DatabaseType.MYSQL) {
             database = new MySQL();
+            database.config(credentials);
             return database;
         }
+
+        database = new SQLite();
+        database.config(credentials);
 
         // Return of default database instance
         return database;
